@@ -1,0 +1,9 @@
+Doctors 10
+Patients 1
+Sickness      1  
+TreatmentTime 2  
+MaxWaitTime   50 
+Simulate First-Come-First-Serve
+Simulate Highest-Sickness-First
+Simulate Shortest-Treatment-Time-First
+Simulate !!
