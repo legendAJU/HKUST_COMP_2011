@@ -1,0 +1,10 @@
+Years: Base income: Income growth rate: Annual living cost: Investment target per year: Investment growth rate: Starting cash: Year: 1 Net worth: 30000.00 Cash: 20000.00 Investment: 10000.00
+Year: 2 Net worth: 52200.00 Cash: 31500.00 Investment: 20700.00
+Year: 3 Net worth: 76694.00 Cash: 44545.00 Investment: 32149.00
+Year: 4 Net worth: 103580.78 Cash: 59181.35 Investment: 44399.43
+Year: 5 Net worth: 132964.18 Cash: 75456.79 Investment: 57507.39
+Year: 6 Net worth: 164953.40 Cash: 93420.49 Investment: 71532.91
+Year: 7 Net worth: 199663.32 Cash: 113123.11 Investment: 86540.21
+Year: 8 Net worth: 237214.83 Cash: 134616.80 Investment: 102598.03
+Year: 9 Net worth: 277735.19 Cash: 157955.31 Investment: 119779.89
+Year: 10 Net worth: 321358.45 Cash: 183193.97 Investment: 138164.48

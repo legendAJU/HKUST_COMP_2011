@@ -1,0 +1,78 @@
+---------------------------------
+Current waiting tickets are:
+<-- [ 0 0 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 0 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 3 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|             Ticket #   3             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):Enter a ticket number to cancel: Successfully cancel the ticket and updated the queue.
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 3 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   3             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):Enter a ticket number to cancel: Fail to cancel because the ticket is not in the queue!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 3 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   3             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):The queue system close successfully!

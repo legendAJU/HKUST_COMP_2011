@@ -1,0 +1,91 @@
+---------------------------------
+Current waiting tickets are:
+<-- [ 0 0 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 0 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 0 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 3 0 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|             Ticket #   3             |
+|              EMPTY SLOT              |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 3 4 0 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|             Ticket #   3             |
+|             Ticket #   4             |
+|              EMPTY SLOT              |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):A customer successfully takes a ticket!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 3 4 5 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|             Ticket #   3             |
+|             Ticket #   4             |
+|             Ticket #   5             |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):Fail to take a ticket because our queue is already full!
+---------------------------------
+Current waiting tickets are:
+<-- [ 1 2 3 4 5 ] <--
+========================================
+|          TICKET QUEUE SYSTEM         |
+|======================================|
+|             Ticket #   1             |
+|             Ticket #   2             |
+|             Ticket #   3             |
+|             Ticket #   4             |
+|             Ticket #   5             |
+========================================
+Enter an operation (1=take; 2=serve first; 3=cancel; 4=check position; 0=exit):The queue system close successfully!
