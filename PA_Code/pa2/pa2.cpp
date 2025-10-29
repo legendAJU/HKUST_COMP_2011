@@ -28,29 +28,29 @@ void display_board(int boardSize, const char board[][N])
         cout << col << ' ';
     }
     cout << endl;
-    
+
     // Print top boundary
     cout << " +";
     for (int col = 0; col < boardSize; col++) {
         cout << "-+";
     }
     cout << endl;
-    
+
     // Print rows with left and right boundaries
     for (int row = 0; row < boardSize; row++) {
         cout << row << "|"; // Row index and left boundary
-        
+
         // Print board content
         for (int col = 0; col < boardSize; col++) {
             // Display white space if entry is '.', otherwise show character
             if(board[row][col] == EMPTY) cout << ' ';
-            else if(board[row][col] == BLACK) cout << "\u25CB"; // for displaying white stones
-            else cout << "\u25CF"; // for displaying black stones
+            else if(board[row][col] == BLACK) cout << "@"; // for displaying white stones
+            else cout << "o"; // for displaying black stones
             cout <<"|";
             // cout << (board[row][col] == empty ? ' ' : board[row][col]) << "|";
         }
         cout << endl;
-        
+
         // Print horizontal boundary after each row
         cout << " +";
         for (int col = 0; col < boardSize; col++) {
@@ -73,6 +73,20 @@ bool sameBoard(int boardSize, const char board1[][N], const char board2[][N])
     for(int i = 0; i < boardSize; ++i) for(int j = 0; j < boardSize; ++j)
         if(board1[i][j] != board2[i][j]) return false;
     return true;
+}
+
+/*helper function: init visit array*/
+void initVisit(bool visit[][N])
+{
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            visit[i][j] = false;
+        }
+        
+    }
+    
 }
 
 
@@ -102,20 +116,33 @@ void countLiberty(int boardSize,const char board[][N], int row, int col, const c
     // TODO: Task 1.1
     // 1. Base case
     //  (1) out of. boundary
-    
-
+    if (!inBoardBound(row,col,boardSize))
+        return;
     //  (2) already visit
-    
-   
+    if (visit[row][col])
+        return;
+    visit[row][col] = true;
     //  (3) this group is not dead
-    
+    if (board[row][col] == EMPTY)
+    {
+        cnt++;
+        //visit[row][col] = true;
+        return;
+    }
 
     //  (4) touch another color
-
+    if (board[row][col] != color)
+    {
+        //visit[row][col] = true;
+        return;
+    }
     
     
     // 2. Recursive case
-    
+    countLiberty(boardSize,board,row+1,col,color,visit,cnt);
+    countLiberty(boardSize,board,row-1,col,color,visit,cnt);
+    countLiberty(boardSize,board,row,col+1,color,visit,cnt);
+    countLiberty(boardSize,board,row,col-1,color,visit,cnt);
 }
 
 /**
@@ -138,7 +165,12 @@ bool isCaptured(int boardSize, const char board[][N] , int row, int col,  char c
 {
     // TODO: Task 1.2
     // check whether the group of (row, col) is dead w.r.t color
-    
+    int numLiberty = 0;
+    countLiberty(boardSize,board,row,col,color,visit,numLiberty);
+    if (numLiberty == 0)
+        return true;
+    else
+        return false;
 
 }
 
@@ -164,6 +196,20 @@ int removeStones(int boardSize, char board[][N], int row, int col, const char co
     // TODO: Task 2.1
     // remove the group of `color` starting from (row, col) , return the size of this removed group
     
+    //base case
+    //  (1)check bound
+    if (!inBoardBound(row,col,boardSize))
+        return 0;
+    //  (2)check color
+    if (board[row][col] != color)
+        return 0;
+
+    // recursive
+    board[row][col] = EMPTY;
+    return 1 + removeStones(boardSize,board,row+1,col,color)
+             + removeStones(boardSize,board,row-1,col,color)    
+             + removeStones(boardSize,board,row,col+1,color)
+             + removeStones(boardSize,board,row,col-1,color);    
 
 }
 
@@ -188,8 +234,46 @@ int updateBoard(int boardSize, char board[][N], int row, int col, char color)
     // TODO: Task 2.2
     // we assume the stone we just put in (row, col) is legal
     // we update the board after putting a stone at (row, col) , returne how many stones is captured by this move
-    
-
+    board[row][col] = color;
+    int numRemoved = 0;
+    bool visit[N][N];
+    initVisit(visit);
+    //check [row+1][col]
+    if(inBoardBound(row+1,col,boardSize) && board[row+1][col] != color)
+    {
+        if (isCaptured(boardSize,board,row+1,col,board[row+1][col],visit))
+        {
+           numRemoved += removeStones(boardSize,board,row+1,col,board[row+1][col]);
+        }
+    }
+    initVisit(visit);
+    //check [row-1][col]
+    if(inBoardBound(row-1,col,boardSize) && board[row-1][col] != color)
+    {
+        if (isCaptured(boardSize,board,row-1,col,board[row-1][col],visit))
+        {
+            numRemoved += removeStones(boardSize,board,row-1,col,board[row-1][col]);
+        }
+    }
+    initVisit(visit);
+    //check [row][col+1]
+    if(inBoardBound(row,col+1,boardSize) && board[row][col+1] != color)
+    {
+        if (isCaptured(boardSize,board,row,col+1,board[row][col+1],visit))
+        {
+           numRemoved += removeStones(boardSize,board,row,col+1,board[row][col+1]);
+        }
+    }
+    initVisit(visit);
+    // check [row][col-1]
+    if(inBoardBound(row,col-1,boardSize) && board[row][col-1] != color)
+    {
+        if (isCaptured(boardSize,board,row,col-1,board[row][col-1],visit))
+        {
+           numRemoved += removeStones(boardSize,board,row,col-1,board[row][col-1]);
+        }
+    }
+    return numRemoved;
 }
 
 /**
@@ -224,6 +308,35 @@ bool isLegalMove(int boardSize, const char board[][N], int row, int col, char co
     // 3. Repetition Prohibition: The updated board after putting the stone is not the same as previousBoard (you may use some given helper function) 
 
 
+
+    //check 0)
+    if (!inBoardBound(row,col,boardSize))
+        return false;
+    // check 1)
+    if (board[row][col] != EMPTY)
+        return false;
+    // check 2)
+    char tempBoard[N][N];
+    copyBoard(boardSize,board,tempBoard);
+    tempBoard[row][col] = color;
+    int numLiberty = 0;
+    bool visit[N][N];
+    initVisit(visit);//init visit array
+    if(updateBoard(boardSize,tempBoard,row,col,color) == 0) // first check whether it captured others
+    {
+        countLiberty(boardSize,tempBoard,row,col,color,visit,numLiberty);
+        if (numLiberty == 0)
+            return false;
+    }
+    // check 3)
+    copyBoard(boardSize,board,tempBoard);
+    updateBoard(boardSize,tempBoard,row,col,color);
+    if(sameBoard(boardSize,tempBoard,previousBoard))
+    {
+        return false;
+    }
+
+    return true;
 }
 
 //=== End of PA2 tasks === 
