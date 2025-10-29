@@ -1,0 +1,8 @@
+boards/board2.txt
+2
+0 2
+1
+2 2 o
+3
+2 3
+8

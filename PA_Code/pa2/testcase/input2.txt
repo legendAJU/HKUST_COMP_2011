@@ -1,0 +1,6 @@
+boards/board1.txt
+1
+1 2 @
+3
+2 2
+8
