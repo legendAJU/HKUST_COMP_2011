@@ -18,8 +18,15 @@ Account* newAccount(long id, const char* name) {
      * 3. Set pkgList, rechargeHistoryList and consumeList to nullptr.
      * 4. Return the pointer to the new account.
      */
-    
 
+    Account* account = new Account;
+    account->id = id;
+    strncpy(account->name,name,NAME_MAX_LEN);
+    account->balance = 0;
+    account->pkgList = nullptr;
+    account->rechargeHistoryList = nullptr;
+    account->consumeList = nullptr;
+    return account;
 }
 
 bool topUpAccount(Account* acc, int modelId, int amount, const char* modelName) {

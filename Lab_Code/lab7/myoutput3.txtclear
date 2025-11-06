@@ -1,0 +1,406 @@
+============================================================
+  GenAI Token Top-Up Station
+============================================================
+  Current registered accounts: 0
+  System ready!
+
+============================================================
+  Quick Help
+============================================================
+  - Create accounts and manage token balances.
+  - Top-up tokens for specific AI models.
+  - Check balances and consume tokens.
+  - Delete accounts.
+
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Create New Account  =============
+  Student ID (8 digits):   Name ( please do not longer than 20 characters):   Success! Account created for Danika (ID: 20250001)
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Create New Account  =============
+  Student ID (8 digits):   Name ( please do not longer than 20 characters):   Success! Account created for Justin (ID: 20250002)
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  =============  Top-Up Tokens  =============
+  Account: Danika (Current balance: 0)
+
+  Available models:
+    1) GPT-3.5-Turbo (Price: 1 per token)
+    2) GPT-4 (Price: 2 per token)
+    3) GPT-4-Turbo (Price: 3 per token)
+    4) Gemini-Pro (Price: 1 per token)
+    5) Gemini-Ultra (Price: 4 per token)
+    6) Claude-3-Haiku (Price: 1 per token)
+    7) Claude-3-Sonnet (Price: 2 per token)
+    8) Claude-3-Opus (Price: 5 per token)
+    9) Llama-3-70B (Price: 1 per token)
+    10) Mistral-Large (Price: 3 per token)
+  Select model ID:   Enter token amount to top-up (1-100000):   Confirm top-up of 100 tokens for model 3 (Total: 300 HKD)? (1=Yes, 0=No):   Success! Added 100 tokens for model 3
+  New balance: 100 tokens
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  =============  Top-Up Tokens  =============
+  Account: Justin (Current balance: 0)
+
+  Available models:
+    1) GPT-3.5-Turbo (Price: 1 per token)
+    2) GPT-4 (Price: 2 per token)
+    3) GPT-4-Turbo (Price: 3 per token)
+    4) Gemini-Pro (Price: 1 per token)
+    5) Gemini-Ultra (Price: 4 per token)
+    6) Claude-3-Haiku (Price: 1 per token)
+    7) Claude-3-Sonnet (Price: 2 per token)
+    8) Claude-3-Opus (Price: 5 per token)
+    9) Llama-3-70B (Price: 1 per token)
+    10) Mistral-Large (Price: 3 per token)
+  Select model ID:   Enter token amount to top-up (1-100000):   Confirm top-up of 300 tokens for model 4 (Total: 300 HKD)? (1=Yes, 0=No):   Success! Added 300 tokens for model 4
+  New balance: 300 tokens
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  =============  Top-Up Tokens  =============
+  Account: Justin (Current balance: 300)
+
+  Available models:
+    1) GPT-3.5-Turbo (Price: 1 per token)
+    2) GPT-4 (Price: 2 per token)
+    3) GPT-4-Turbo (Price: 3 per token)
+    4) Gemini-Pro (Price: 1 per token)
+    5) Gemini-Ultra (Price: 4 per token)
+    6) Claude-3-Haiku (Price: 1 per token)
+    7) Claude-3-Sonnet (Price: 2 per token)
+    8) Claude-3-Opus (Price: 5 per token)
+    9) Llama-3-70B (Price: 1 per token)
+    10) Mistral-Large (Price: 3 per token)
+  Select model ID:   Enter token amount to top-up (1-100000):   Confirm top-up of 300 tokens for model 4 (Total: 300 HKD)? (1=Yes, 0=No):   Success! Added 300 tokens for model 4
+  New balance: 600 tokens
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: ============================================================
+  Consumption Round 1
+============================================================
+
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  Selected Account: Justin (ID: 20250002)
+  Current balance: 600 tokens
+
+  Token Balance by Model:
+  ------------------------------------------------------------
+  |                    Token Balance by Model                |
+  ------------------------------------------------------------
+  |  1) GPT-3.5-Turbo        |      0 tokens  |
+  |  2) GPT-4                |      0 tokens  |
+  |  3) GPT-4-Turbo          |      0 tokens  |
+  |  4) Gemini-Pro           |    600 tokens  |
+  |  5) Gemini-Ultra         |      0 tokens  |
+  |  6) Claude-3-Haiku       |      0 tokens  |
+  |  7) Claude-3-Sonnet      |      0 tokens  |
+  |  8) Claude-3-Opus        |      0 tokens  |
+  |  9) Llama-3-70B          |      0 tokens  |
+  | 10) Mistral-Large        |      0 tokens  |
+  ------------------------------------------------------------
+  |  Total Balance:                        |   600 tokens    |
+  ------------------------------------------------------------
+
+  Available models for consumption:
+  Available models:
+    1) GPT-3.5-Turbo (Price: 1 per token)
+    2) GPT-4 (Price: 2 per token)
+    3) GPT-4-Turbo (Price: 3 per token)
+    4) Gemini-Pro (Price: 1 per token)
+    5) Gemini-Ultra (Price: 4 per token)
+    6) Claude-3-Haiku (Price: 1 per token)
+    7) Claude-3-Sonnet (Price: 2 per token)
+    8) Claude-3-Opus (Price: 5 per token)
+    9) Llama-3-70B (Price: 1 per token)
+    10) Mistral-Large (Price: 3 per token)
+  Select model ID:   Available tokens for this model: 600
+  How many tokens to consume: 
+  =============  Consumption Result  =============
+  Account: Justin
+  Model: Gemini-Pro
+  Requested: 270 tokens
+  Actually consumed: 2 tokens
+  Remaining balance: 330 tokens
+
+  Consumption Details:
+  Remaining packages after consumption:
+  Package ID: ORD1001, Amount: 30
+  Package ID: ORD1002, Amount: 300
+  Note: Could not consume all requested tokens.
+  ==============================================
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: ============================================================
+  Consumption Round 2
+============================================================
+
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  Selected Account: Justin (ID: 20250002)
+  Current balance: 330 tokens
+
+  Token Balance by Model:
+  ------------------------------------------------------------
+  |                    Token Balance by Model                |
+  ------------------------------------------------------------
+  |  1) GPT-3.5-Turbo        |      0 tokens  |
+  |  2) GPT-4                |      0 tokens  |
+  |  3) GPT-4-Turbo          |      0 tokens  |
+  |  4) Gemini-Pro           |    330 tokens  |
+  |  5) Gemini-Ultra         |      0 tokens  |
+  |  6) Claude-3-Haiku       |      0 tokens  |
+  |  7) Claude-3-Sonnet      |      0 tokens  |
+  |  8) Claude-3-Opus        |      0 tokens  |
+  |  9) Llama-3-70B          |      0 tokens  |
+  | 10) Mistral-Large        |      0 tokens  |
+  ------------------------------------------------------------
+  |  Total Balance:                        |   330 tokens    |
+  ------------------------------------------------------------
+
+  Available models for consumption:
+  Available models:
+    1) GPT-3.5-Turbo (Price: 1 per token)
+    2) GPT-4 (Price: 2 per token)
+    3) GPT-4-Turbo (Price: 3 per token)
+    4) Gemini-Pro (Price: 1 per token)
+    5) Gemini-Ultra (Price: 4 per token)
+    6) Claude-3-Haiku (Price: 1 per token)
+    7) Claude-3-Sonnet (Price: 2 per token)
+    8) Claude-3-Opus (Price: 5 per token)
+    9) Llama-3-70B (Price: 1 per token)
+    10) Mistral-Large (Price: 3 per token)
+  Select model ID:   Available tokens for this model: 330
+  How many tokens to consume: 
+  =============  Consumption Result  =============
+  Account: Justin
+  Model: Gemini-Pro
+  Requested: 50 tokens
+  Actually consumed: 2 tokens
+  Remaining balance: 280 tokens
+
+  Consumption Details:
+  Remaining packages after consumption:
+  Package ID: ORD1001, Amount: 0
+  Package ID: ORD1002, Amount: 280
+  Note: Could not consume all requested tokens.
+  ==============================================
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  =============  Account Details  =============
+  Name: Justin
+  Account ID: 20250002
+  Total Balance: 280 tokens
+
+  Token Balance by Model:
+  ------------------------------------------------------------
+  |                    Token Balance by Model                |
+  ------------------------------------------------------------
+  |  1) GPT-3.5-Turbo        |      0 tokens  |
+  |  2) GPT-4                |      0 tokens  |
+  |  3) GPT-4-Turbo          |      0 tokens  |
+  |  4) Gemini-Pro           |    280 tokens  |
+  |  5) Gemini-Ultra         |      0 tokens  |
+  |  6) Claude-3-Haiku       |      0 tokens  |
+  |  7) Claude-3-Sonnet      |      0 tokens  |
+  |  8) Claude-3-Opus        |      0 tokens  |
+  |  9) Llama-3-70B          |      0 tokens  |
+  | 10) Mistral-Large        |      0 tokens  |
+  ------------------------------------------------------------
+  |  Total Balance:                        |   280 tokens    |
+  ------------------------------------------------------------
+
+  =============  Recharge History  =============
+    Order ID         | Model ID | Model Name           | Amount
+    ----------------+----------+----------------------+-------
+    ORD1002          |        4 | Gemini-Pro           |    300
+    ORD1001          |        4 | Gemini-Pro           |    300
+
+  =============  Consumption History  =============
+    Consume ID       | Model ID | Model Name           | Amount
+    -----------------+----------+----------------------+-------
+    CNS10001         |        4 | Gemini-Pro           |      2
+    CNS10000         |        4 | Gemini-Pro           |      2
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  All Accounts Overview  =============
+
+  1. Account: Danika (ID: 20250001)
+     Total Balance: 100 tokens
+     Model Balances:
+        1) GPT-3.5-Turbo        :      0 tokens (empty)
+        2) GPT-4                :      0 tokens (empty)
+        3) GPT-4-Turbo          :    100 tokens
+        4) Gemini-Pro           :      0 tokens (empty)
+        5) Gemini-Ultra         :      0 tokens (empty)
+        6) Claude-3-Haiku       :      0 tokens (empty)
+        7) Claude-3-Sonnet      :      0 tokens (empty)
+        8) Claude-3-Opus        :      0 tokens (empty)
+        9) Llama-3-70B          :      0 tokens (empty)
+       10) Mistral-Large        :      0 tokens (empty)
+  -------------------------------------------------------
+
+  2. Account: Justin (ID: 20250002)
+     Total Balance: 280 tokens
+     Model Balances:
+        1) GPT-3.5-Turbo        :      0 tokens (empty)
+        2) GPT-4                :      0 tokens (empty)
+        3) GPT-4-Turbo          :      0 tokens (empty)
+        4) Gemini-Pro           :    280 tokens
+        5) Gemini-Ultra         :      0 tokens (empty)
+        6) Claude-3-Haiku       :      0 tokens (empty)
+        7) Claude-3-Sonnet      :      0 tokens (empty)
+        8) Claude-3-Opus        :      0 tokens (empty)
+        9) Llama-3-70B          :      0 tokens (empty)
+       10) Mistral-Large        :      0 tokens (empty)
+
+  ==================================================
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice:    Delete account Justin  Please confirm (1=Yes, 0=No): 
+  Account deleted successfully!
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  All Accounts Overview  =============
+
+  1. Account: Danika (ID: 20250001)
+     Total Balance: 100 tokens
+     Model Balances:
+        1) GPT-3.5-Turbo        :      0 tokens (empty)
+        2) GPT-4                :      0 tokens (empty)
+        3) GPT-4-Turbo          :    100 tokens
+        4) Gemini-Pro           :      0 tokens (empty)
+        5) Gemini-Ultra         :      0 tokens (empty)
+        6) Claude-3-Haiku       :      0 tokens (empty)
+        7) Claude-3-Sonnet      :      0 tokens (empty)
+        8) Claude-3-Opus        :      0 tokens (empty)
+        9) Llama-3-70B          :      0 tokens (empty)
+       10) Mistral-Large        :      0 tokens (empty)
+
+  ==================================================
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+============================================================
+  Thank you for using Token Top-Up Station!
+============================================================
+  Total accounts managed: 1
+  Goodbye!

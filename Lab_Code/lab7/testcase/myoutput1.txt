@@ -1,0 +1,176 @@
+============================================================
+  GenAI Token Top-Up Station
+============================================================
+  Current registered accounts: 0
+  System ready!
+
+============================================================
+  Quick Help
+============================================================
+  - Create accounts and manage token balances.
+  - Top-up tokens for specific AI models.
+  - Check balances and consume tokens.
+  - Delete accounts.
+
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Create New Account  =============
+  Student ID (8 digits):   Name ( please do not longer than 20 characters):   Input too long. Please re-enter.
+  Name ( please do not longer than 20 characters):   Success! Account created for Danika (ID: 20250001)
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Create New Account  =============
+  Student ID (8 digits):   Name ( please do not longer than 20 characters):   Success! Account created for Justin (ID: 20250002)
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice: 
+  =============  Account Details  =============
+  Name: Justin
+  Account ID: 20250002
+  Total Balance: 0 tokens
+
+  Token Balance by Model:
+  ------------------------------------------------------------
+  |                    Token Balance by Model                |
+  ------------------------------------------------------------
+  |  1) GPT-3.5-Turbo        |      0 tokens  |
+  |  2) GPT-4                |      0 tokens  |
+  |  3) GPT-4-Turbo          |      0 tokens  |
+  |  4) Gemini-Pro           |      0 tokens  |
+  |  5) Gemini-Ultra         |      0 tokens  |
+  |  6) Claude-3-Haiku       |      0 tokens  |
+  |  7) Claude-3-Sonnet      |      0 tokens  |
+  |  8) Claude-3-Opus        |      0 tokens  |
+  |  9) Llama-3-70B          |      0 tokens  |
+  | 10) Mistral-Large        |      0 tokens  |
+  ------------------------------------------------------------
+  |  Total Balance:                        |     0 tokens    |
+  ------------------------------------------------------------
+
+  =============  Recharge History  =============
+  No recharge records.
+
+  =============  Consumption History  =============
+  No consumption records.
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  All Accounts Overview  =============
+
+  1. Account: Danika (ID: 20250001)
+     Total Balance: 0 tokens
+     Model Balances:
+        1) GPT-3.5-Turbo        :      0 tokens (empty)
+        2) GPT-4                :      0 tokens (empty)
+        3) GPT-4-Turbo          :      0 tokens (empty)
+        4) Gemini-Pro           :      0 tokens (empty)
+        5) Gemini-Ultra         :      0 tokens (empty)
+        6) Claude-3-Haiku       :      0 tokens (empty)
+        7) Claude-3-Sonnet      :      0 tokens (empty)
+        8) Claude-3-Opus        :      0 tokens (empty)
+        9) Llama-3-70B          :      0 tokens (empty)
+       10) Mistral-Large        :      0 tokens (empty)
+  -------------------------------------------------------
+
+  2. Account: Justin (ID: 20250002)
+     Total Balance: 0 tokens
+     Model Balances:
+        1) GPT-3.5-Turbo        :      0 tokens (empty)
+        2) GPT-4                :      0 tokens (empty)
+        3) GPT-4-Turbo          :      0 tokens (empty)
+        4) Gemini-Pro           :      0 tokens (empty)
+        5) Gemini-Ultra         :      0 tokens (empty)
+        6) Claude-3-Haiku       :      0 tokens (empty)
+        7) Claude-3-Sonnet      :      0 tokens (empty)
+        8) Claude-3-Opus        :      0 tokens (empty)
+        9) Llama-3-70B          :      0 tokens (empty)
+       10) Mistral-Large        :      0 tokens (empty)
+
+  ==================================================
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  Select Account  =============
+    1) Danika (ID: 20250001)
+    2) Justin (ID: 20250002)
+  Your choice:    Delete account Justin  Please confirm (1=Yes, 0=No): 
+  Account deleted successfully!
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+  ============  Main Menu  ============
+  1) Create new account
+  2) View account details
+  3) Top-up tokens
+  4) Run consumption round
+  5) Show all accounts
+  6) Delete account
+  0) Exit
+  ====================================
+  Your choice: 
+  =============  All Accounts Overview  =============
+
+  1. Account: Danika (ID: 20250001)
+     Total Balance: 0 tokens
+     Model Balances:
+        1) GPT-3.5-Turbo        :      0 tokens (empty)
+        2) GPT-4                :      0 tokens (empty)
+        3) GPT-4-Turbo          :      0 tokens (empty)
+        4) Gemini-Pro           :      0 tokens (empty)
+        5) Gemini-Ultra         :      0 tokens (empty)
+        6) Claude-3-Haiku       :      0 tokens (empty)
+        7) Claude-3-Sonnet      :      0 tokens (empty)
+        8) Claude-3-Opus        :      0 tokens (empty)
+        9) Llama-3-70B          :      0 tokens (empty)
+       10) Mistral-Large        :      0 tokens (empty)
+
+  ==================================================
+  Continue? (1=Return to Main Menu, 0=Exit Program): 
+============================================================
+  Thank you for using Token Top-Up Station!
+============================================================
+  Total accounts managed: 1
+  Goodbye!

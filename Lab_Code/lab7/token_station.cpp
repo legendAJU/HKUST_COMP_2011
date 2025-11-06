@@ -24,8 +24,7 @@ int calculateTopUpCost(int tokenAmount, int modelId, Model* modelTable) {
      * TODO 2: Compute the total HKD cost for the requested token amount.
      * Return the total HKD cost
      */
-
-
+    return getModelPrice(modelId) * tokenAmount;
 }
 
 
@@ -40,8 +39,13 @@ TopupTokenPkg* newTokenPkg(const char orderId[], int amount, int modelId, const 
      * 3. Set amount, modelId, and next (nullptr).
      * 4. Return the pointer to the new node.
      */
-
-
+    TopupTokenPkg* newTokenPkg = new TopupTokenPkg;
+    strncpy(newTokenPkg->orderId,orderId,ORDER_ID_MAX_LEN);
+    newTokenPkg->amount = amount;
+    newTokenPkg->modelId = modelId;
+    strncpy(newTokenPkg->modelName,modelName,NAME_MAX_LEN);
+    newTokenPkg->next = nullptr;
+    return newTokenPkg;
 }
 
 
@@ -52,7 +56,29 @@ void insertPkg(Account* acc, TopupTokenPkg* pkg) {
     /*
      * TODO 4: Insert pkg at the head or tail of acc->pkgList and update balance.
      */
-
+    //insert at tail
+    if(acc->pkgList == nullptr) 
+    {
+        acc->pkgList = pkg;
+        acc->balance += pkg->amount;
+        return;
+    }
+    TopupTokenPkg* pkgList = acc->pkgList;
+    while(pkgList != nullptr)
+    {
+        //cout<<"--------------------------------Updateing! ----------------------------"<<endl;
+        if(pkgList->next == nullptr)
+        {
+            
+            //cout<<"Total account balance is "<< acc->balance<<endl;
+            //cout<<"Total pkg amount is "<< pkg->amount<<endl;
+            pkgList->next = pkg;
+            acc->balance += pkg->amount;
+            break;
+            //cout<<"Now total account balance is " << acc->balance<<endl;
+        }
+        pkgList = pkgList->next;
+    }
 
 }
 
@@ -68,6 +94,26 @@ int consumeTokens(Account* acc, int request, int modelId) {
     * Tips: traverse the linked list, and reduce the amount of each package node
     *       until the request is fully satisfied or no more tokens available
     */
+   TopupTokenPkg* pkgList = acc->pkgList;
+   while(pkgList != nullptr)
+   {    
+    if(pkgList->modelId == modelId)
+    {
+        if(consumed > request)
+        {
+            break;
+        }
+        else
+        {
+            int token_consumed_value = (pkgList->amount > (request - consumed))? (request-consumed):pkgList->amount;
+            pkgList->amount -= token_consumed_value;
+            consumed += token_consumed_value;
+            acc->balance -= token_consumed_value;
+        }
+    }
+    pkgList = pkgList->next;
+   }
+   return consumed;
 
 
 }
@@ -82,7 +128,15 @@ int getTokenBalance(Account* acc, int modelId) {
      * 2. Accumulate the amount field for every node where modelId matches.
      * 3. Return the total.
      */
-
+    int amount = 0;
+    TopupTokenPkg* pkgList = acc->pkgList;
+    while(pkgList != nullptr)
+    {
+        if(pkgList->modelId == modelId) amount += pkgList->amount;
+        if(pkgList->next == nullptr) break;
+        pkgList = pkgList->next;
+    }
+    return amount;
 }
 
 
