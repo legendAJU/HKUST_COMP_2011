@@ -62,6 +62,7 @@ void add_locker_for_room(RoomManagement& room_management, int room_id, int locke
     new_locker->locker_id = target_room.locker_count;
     new_locker->capacity = locker_size;
     new_locker->avaliable_space = locker_size;
+    new_locker->item_count = 0;
     LockerView* new_locker_view = new LockerView;
     new_locker_view->locker = new_locker;
     new_locker_view->pre = nullptr;
@@ -131,7 +132,7 @@ void management_remove_student(StudentManagement& all_students, int student_id) 
     if(student_id < 0 || student_id >= all_students.size) return;
     if(all_students.students[student_id].id == -1) return;
     // 2. Mark student as deregistered with -1.
-    all_students.students[student_id].id == -1;
+    all_students.students[student_id].id = -1;
     // 3. Delete Students' items array.
     delete[] all_students.students[student_id].items;
     all_students.students[student_id].items = nullptr;
@@ -144,6 +145,7 @@ void management_remove_student(StudentManagement& all_students, int student_id) 
 bool store_item_for_student(StudentManagement& student_management, RoomManagement& room_management,
      int student_id, int item_id, int size) {
     // 1. Find student based on student_id. If student not found, return false.
+    //cout<<"Start storeing!!"<<endl;
     if(student_id < 0 || student_id >= student_management.size) return false;
     if(student_management.students[student_id].id == -1) return false;
     Student& target_student = student_management.students[student_id];
@@ -153,6 +155,7 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
     // checking each item’s locker for sufficient space (available_space >= item_size). 
     // Selects the FIRST locker that can accommodate the new item.
     Locker* potential_locker = nullptr;
+    LockerView* potential_locker_view = nullptr;
     //Phase 1: Existing Lockers
     Item** target_student_items = target_student.items;
     for (int i = 0; i < target_student.items_count; i++)
@@ -160,6 +163,16 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
         if(target_student_items[i]->stored_locker->avaliable_space >= size)
         {
             potential_locker = target_student_items[i]->stored_locker;
+            LockerView* curr_locker_list = potential_locker->belonged_room->locker_list;
+            while(curr_locker_list != nullptr)
+            {
+                if(curr_locker_list->locker == potential_locker)
+                {
+                    potential_locker_view = curr_locker_list;
+                    break;
+                }
+                curr_locker_list = curr_locker_list->next;
+            }
             break;
         }
     }
@@ -167,7 +180,7 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
     // Within each room, traverses the locker linked list from head to tail to find an empty locker.
     // Returns the first empty locker found.
     //Phase 2: Empty Locker Search
-    LockerView* potential_locker_view;
+    
     if(potential_locker == nullptr)
     {
         
@@ -193,7 +206,7 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
     }
     // 2.3 If no such locker is found, the operation fails and returns false.
     if(potential_locker == nullptr) return false;
-
+    //cout<<"We can store !!"<<endl;
     // 3. Create new item.
     Item* new_item = new Item;
     new_item->id = item_id;
@@ -209,8 +222,8 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
     new_item_view->item = new_item;
     new_item_view->prev = nullptr;
     new_item_view->next = nullptr;
+    //cout<<"Item view stored is "<< new_item_view<<endl;
     //4.2
-    potential_locker->item_count+=1;
     potential_locker->avaliable_space -= new_item_view->item->size;
     if(potential_locker->item_count == 0)
     {
@@ -264,7 +277,7 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
         }
         
     }
-
+    potential_locker->item_count+=1;
     
     // 5. Adjusts the locker’s position in the room’s locker list\
     // sorted by available space (descending) and then by locker ID as a tiebreaker.
@@ -441,31 +454,162 @@ bool store_item_for_student(StudentManagement& student_management, RoomManagemen
 /// Task 5: Remove an item for a student
 bool remove_item_for_student(StudentManagement& student_management, RoomManagement& room_management, int student_id, int item_id) {
     // 1. Find student based on student_id. If student not found, return false.
-
-
+    if(student_id < 0 || student_id >= student_management.size) return false;
+    if(student_management.students[student_id].id == -1) return false;
+    Student& target_student = student_management.students[student_id];
     // 2. Find item based on item_id in the student's item array. If item not found, return false.
-
+    Item* target_item = nullptr;
+    int target_item_index = 0;
+    for (int i = 0; i < target_student.items_count; i++)
+    {
+        if(target_student.items[i]->id == item_id) 
+        {
+            target_item = target_student.items[i];
+            target_item_index = i;
+            break;
+        }
+    }
+    if(target_item == nullptr) return false;
 
     // 3. Find the locker and room the item is stored in.
-
+    Locker* stored_locker = target_item->stored_locker;
+    Room* stored_room = target_item->stored_locker->belonged_room;
 
     // 4. Remove item from locker.
     // 4.1 Removes the corresponding ItemView node from the locker’s item_list linked
     // 4.2 Updates the locker’s information.
-
+    ItemView* target_item_view = stored_locker->item_list;
+    stored_locker->avaliable_space += target_item->size;
+    while(target_item_view!=nullptr)
+    {
+        if(target_item_view->item == target_item)
+        {   
+            if(target_item_view->prev == nullptr && target_item_view->next == nullptr)
+            {
+                stored_locker->item_list = nullptr;
+                delete target_item_view;
+                target_item_view = nullptr;
+            }
+            else if(target_item_view->prev == nullptr && target_item_view->next != nullptr) //delete head
+            {
+                target_item_view->next->prev = nullptr;
+                stored_locker->item_list = target_item_view->next;
+                delete target_item_view;
+                target_item_view = nullptr;
+            }
+            else if (target_item_view->next == nullptr && target_item_view->prev != nullptr) // delete tail
+            {
+                target_item_view->prev->next = nullptr;
+                delete target_item_view;
+                target_item_view = nullptr;
+            }
+            else
+            {
+            target_item_view->prev->next = target_item_view->next;
+            target_item_view->next->prev = target_item_view->prev;
+            delete target_item_view;
+            target_item_view = nullptr;
+            }
+            break;
+        }
+        target_item_view = target_item_view->next;
+    }
+    stored_locker->item_count--;
+    
 
     // 5. Adjusts the locker’s position in the room’s locker list
     // sorted by available space (descending) and then by locker ID as a tiebreaker.
+    //Find stored locker view
+    LockerView* stored_locker_view = stored_room->locker_list;
+    while(stored_locker_view != nullptr)
+    {
+        if(stored_locker_view->locker == stored_locker) break;
+        stored_locker_view = stored_locker_view->next;
+    }
+    //Find place to insert
+    LockerView* curr_locker_view = stored_locker_view->pre;
+    while(curr_locker_view != nullptr)
+    {
+        if(curr_locker_view->locker->avaliable_space < stored_locker_view->locker->avaliable_space)
+        {
+            curr_locker_view = curr_locker_view->pre;
+        }
+        else if (curr_locker_view->locker->avaliable_space == stored_locker_view->locker->avaliable_space)
+        {
+            if(curr_locker_view->locker->locker_id < stored_locker_view->locker->locker_id)
+            {
+                curr_locker_view = curr_locker_view->pre;
+            }
+            else break;
+        }
+        else break;
+    }
 
+    if(stored_locker_view->next == nullptr)
+    {
+        if(curr_locker_view == nullptr)
+        {
+            LockerView* head_locker_view = stored_locker_view->locker->belonged_room->locker_list;
+            if(head_locker_view != stored_locker_view)
+            {
+                head_locker_view->pre = stored_locker_view;
+                stored_locker_view->pre->next = nullptr;
+                stored_locker_view->next = head_locker_view;
+                stored_locker_view->pre = nullptr;
+                stored_locker_view->locker->belonged_room->locker_list = stored_locker_view;
+            }
+        }
+        else if (curr_locker_view->next != stored_locker_view)
+        {
+            curr_locker_view->next->pre = stored_locker_view;
+            stored_locker_view->pre->next = nullptr;
+            stored_locker_view->pre = curr_locker_view;
+            stored_locker_view->next = curr_locker_view->next;
+            curr_locker_view->next = stored_locker_view;
+        }
+    }
+    else
+    {
+        if(curr_locker_view == nullptr)
+        {
+            LockerView* head_locker_view = stored_locker_view->locker->belonged_room->locker_list;
+            if(head_locker_view != stored_locker_view)
+            {
+                stored_locker_view->pre->next = stored_locker_view->next;
+                stored_locker_view->next->pre = stored_locker_view->pre;
+                stored_locker_view->next = head_locker_view;
+                head_locker_view->pre = stored_locker_view;
+                stored_locker_view->pre = nullptr;
+                stored_locker_view->locker->belonged_room->locker_list = stored_locker_view;
+            }
+        }
+        else if(curr_locker_view->next != stored_locker_view)
+        {
+            stored_locker_view->pre->next = stored_locker_view->next;
+            stored_locker_view->next->pre = stored_locker_view->pre;
+            stored_locker_view->pre = curr_locker_view;
+            stored_locker_view->next = curr_locker_view->next;
+            curr_locker_view->next->pre = stored_locker_view;
+            curr_locker_view->next = stored_locker_view;
+        }
+    }
 
     // 6. Remove item from student's item array.
     // 6.1 Finds the item in the student's item array.
     // 6.2 Shifts subsequent items to fill the gap.
     // 6.3 Updates the student's item count.
-
+    delete target_item;
+    target_item = nullptr;
+    for (int i = target_item_index+1; i < target_student.items_count; i++)
+    {
+        if(target_student.items[i] == nullptr) break;
+        target_student.items[i-1] = target_student.items[i];
+    }
+    target_student.items_count--;
+    
 
     // 7. Deallocates the item.
-
+    // have done yet
     // 8. Returns true to indicate successful removal.
     return true;
 }
@@ -474,25 +618,32 @@ bool remove_item_for_student(StudentManagement& student_management, RoomManageme
 void remove_student(StudentManagement& student_management, RoomManagement& room_management, int student_id) {
     
     // 1. Find student based on student_id.
-
-    
+    Student& target_student = student_management.students[student_id];
+    //print_student_status(student_management,student_id);
     // 2. Remove all items belonging to the student.
     // For each item:
     // 2.1 Find the locker and room the item is stored in.
     // 2.2 Remove item from locker.
     // 2.3 Adjusts the locker’s position in the room’s locker list.
     // 2.4 Deallocates the item.
-
+    while(target_student.items_count > 0)
+    {
+        //cout<<target_student.items_count << endl;
+        remove_item_for_student(student_management,room_management,target_student.id,target_student.items[0]->id);
+        //cout<<"After deleting one, we have:"<< target_student.items_count<<endl;
+    }
 
     // 3. Remove student from management.
+    management_remove_student(student_management,student_id);
     return;
 }
 
 /// Task 7: Defragment items for a student
 bool defragment_for_student(StudentManagement& student_management, RoomManagement& room_management, int student_id) {
     // 1. Find student based on student_id. If student not found, return false.
-
-
+    if(student_id < 0 || student_id >= student_management.size) return false;
+    if(student_management.students[student_id].id == -1) return false;
+    Student& target_student = student_management.students[student_id];
     // 2. Take all items from their current lockers WITHOUT deletion
     // 2.1 For each item, find the locker and room the item is stored in.
     // 2.2 Take item from locker.
@@ -520,14 +671,24 @@ bool defragment_for_student(StudentManagement& student_management, RoomManagemen
 /// Task 8: Clean up all items for a room
 void cleanup_for_room(StudentManagement& student_management, RoomManagement& room_management, int room_id) {
     // 1. Find room based on room_id. if room not found, return.
-
-
+    if(room_id < 0 || room_id >= room_management.room_count) return;
+    Room& target_room = room_management.rooms[room_id];
     // 2. For each locker in the room:
     //    For each item in the locker:
     //      - Find the student the item belongs to.
     //      - Remove item from student's item array.
     //      - Deallocates the item.
-
+    // LockerView* curr_locker = target_room.locker_list;
+    // while(target_room.locker_list != nullptr)
+    // {
+    //     while(curr_locker->locker->item_count > 0)
+    //     {
+    //         remove_item_for_student(student_management,room_management,
+    //         curr_locker->locker->item_list->item->belonged_student->id,curr_locker->locker->item_list->item->id);
+    //     }
+        
+    // }
+    
 
     // 3. Reset locker information and locker list order.
 

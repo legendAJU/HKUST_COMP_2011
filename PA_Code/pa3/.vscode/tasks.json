@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-debug",
+            "type": "shell",
+            "command": "make",
+            "args": ["debug"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "编译带调试信息的正常版本"
+        },
+        {
+            "label": "build-memcheck-debug",
+            "type": "shell",
+            "command": "make",
+            "args": ["MEMCHECK_CXXFLAGS=-std=c++11 -Wall -Wextra -g -O0 -fsanitize=address,leak,undefined", "MEMCHECK_LDFLAGS=-fsanitize=address,leak,undefined", "storage_management_memcheck"],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "编译带调试信息的内存检查版本"
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "make",
+            "args": ["clean"],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "清理构建文件"
+        }
+    ]
+}
