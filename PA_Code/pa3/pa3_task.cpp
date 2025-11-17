@@ -5,6 +5,281 @@
 /// Please make sure all your implementation are included in this file.
 /// We will test your code only based on this file.
 
+//helper function
+
+void adjust_locker_list(Room* stored_room,Locker* stored_locker)
+{
+    LockerView* stored_locker_view = stored_room->locker_list;
+    while(stored_locker_view != nullptr)
+    {
+        if(stored_locker_view->locker == stored_locker) break;
+        stored_locker_view = stored_locker_view->next;
+    }
+    LockerView* curr_locker_view = stored_locker_view->pre;
+    while(curr_locker_view != nullptr)
+    {
+        if(curr_locker_view->locker->avaliable_space < stored_locker_view->locker->avaliable_space)
+        {
+            curr_locker_view = curr_locker_view->pre;
+        }
+        else if (curr_locker_view->locker->avaliable_space == stored_locker_view->locker->avaliable_space)
+        {
+            if(curr_locker_view->locker->locker_id < stored_locker_view->locker->locker_id)
+            {
+                curr_locker_view = curr_locker_view->pre;
+            }
+            else break;
+        }
+        else break;
+    }
+
+    if(stored_locker_view->next == nullptr)
+    {
+        if(curr_locker_view == nullptr)
+        {
+            LockerView* head_locker_view = stored_locker_view->locker->belonged_room->locker_list;
+            if(head_locker_view != stored_locker_view)
+            {
+                head_locker_view->pre = stored_locker_view;
+                stored_locker_view->pre->next = nullptr;
+                stored_locker_view->next = head_locker_view;
+                stored_locker_view->pre = nullptr;
+                stored_locker_view->locker->belonged_room->locker_list = stored_locker_view;
+            }
+        }
+        else if (curr_locker_view->next != stored_locker_view)
+        {
+            curr_locker_view->next->pre = stored_locker_view;
+            stored_locker_view->pre->next = nullptr;
+            stored_locker_view->pre = curr_locker_view;
+            stored_locker_view->next = curr_locker_view->next;
+            curr_locker_view->next = stored_locker_view;
+        }
+    }
+    else
+    {
+        if(curr_locker_view == nullptr)
+        {
+            LockerView* head_locker_view = stored_locker_view->locker->belonged_room->locker_list;
+            if(head_locker_view != stored_locker_view)
+            {
+                stored_locker_view->pre->next = stored_locker_view->next;
+                stored_locker_view->next->pre = stored_locker_view->pre;
+                stored_locker_view->next = head_locker_view;
+                head_locker_view->pre = stored_locker_view;
+                stored_locker_view->pre = nullptr;
+                stored_locker_view->locker->belonged_room->locker_list = stored_locker_view;
+            }
+        }
+        else if(curr_locker_view->next != stored_locker_view)
+        {
+            stored_locker_view->pre->next = stored_locker_view->next;
+            stored_locker_view->next->pre = stored_locker_view->pre;
+            stored_locker_view->pre = curr_locker_view;
+            stored_locker_view->next = curr_locker_view->next;
+            curr_locker_view->next->pre = stored_locker_view;
+            curr_locker_view->next = stored_locker_view;
+        }
+    }
+}
+void adjust_item_list(Item* target_item)
+{
+    Locker* stored_locker = target_item->stored_locker;
+    Room* stored_room = target_item->stored_locker->belonged_room;
+
+    // 4. Remove item from locker.
+    // 4.1 Removes the corresponding ItemView node from the locker’s item_list linked
+    // 4.2 Updates the locker’s information.
+    ItemView* target_item_view = stored_locker->item_list;
+    stored_locker->avaliable_space += target_item->size;
+    while(target_item_view!=nullptr)
+    {
+        if(target_item_view->item == target_item)
+        {   
+            if(target_item_view->prev == nullptr && target_item_view->next == nullptr)
+            {
+                stored_locker->item_list = nullptr;
+                delete target_item_view;
+                target_item_view = nullptr;
+            }
+            else if(target_item_view->prev == nullptr && target_item_view->next != nullptr) //delete head
+            {
+                target_item_view->next->prev = nullptr;
+                stored_locker->item_list = target_item_view->next;
+                delete target_item_view;
+                target_item_view = nullptr;
+            }
+            else if (target_item_view->next == nullptr && target_item_view->prev != nullptr) // delete tail
+            {
+                target_item_view->prev->next = nullptr;
+                delete target_item_view;
+                target_item_view = nullptr;
+            }
+            else
+            {
+            target_item_view->prev->next = target_item_view->next;
+            target_item_view->next->prev = target_item_view->prev;
+            delete target_item_view;
+            target_item_view = nullptr;
+            }
+            break;
+        }
+        target_item_view = target_item_view->next;
+    }
+    stored_locker->item_count--;
+}
+void store_item(Item* new_item,Locker* potential_locker,LockerView* potential_locker_view)
+{
+    new_item->stored_locker = potential_locker;
+    ItemView* new_item_view = new ItemView;
+    new_item_view->item = new_item;
+    new_item_view->prev = nullptr;
+    new_item_view->next = nullptr;
+    //cout<<"Item view stored is "<< new_item_view<<endl;
+    //4.2
+    potential_locker->avaliable_space -= new_item_view->item->size;
+    if(potential_locker->item_count == 0)
+    {
+        potential_locker->item_list = new_item_view;
+    }
+    else
+    {
+        ItemView* curr_locker_item_list = potential_locker->item_list;
+        while (curr_locker_item_list != nullptr)
+        {
+            if(curr_locker_item_list->item->size < new_item_view->item->size)
+            {
+                curr_locker_item_list = curr_locker_item_list->next;    
+            }
+            else if (curr_locker_item_list->item->size == new_item_view->item->size)
+            {
+                if(curr_locker_item_list->item->id < new_item_view->item->id)
+                {
+                    curr_locker_item_list = curr_locker_item_list->next;    
+                }
+                else break;
+            }
+            else break;
+        }
+        //insert new_item_view before curr_locker_item_list
+        if(curr_locker_item_list == nullptr)
+        {
+            ItemView* tail_item = potential_locker->item_list;
+            while(tail_item != nullptr)
+            {
+                if(tail_item->next == nullptr) break;
+                tail_item = tail_item->next;
+            }
+            tail_item->next = new_item_view;
+            new_item_view->prev = tail_item;
+            new_item_view->next = nullptr;
+        }
+        else if (curr_locker_item_list->prev == nullptr)
+        {
+            potential_locker->item_list->prev = new_item_view;
+            new_item_view->next = potential_locker->item_list;
+            new_item_view->prev = nullptr;
+            potential_locker->item_list = new_item_view;
+        }
+        else
+        {
+            curr_locker_item_list->prev->next = new_item_view;
+            new_item_view->prev = curr_locker_item_list->prev;
+            new_item_view->next = curr_locker_item_list;
+            curr_locker_item_list->prev = new_item_view;
+        }
+        
+    }
+    potential_locker->item_count+=1;
+    
+    // 5. Adjusts the locker’s position in the room’s locker list\
+    // sorted by available space (descending) and then by locker ID as a tiebreaker.
+    LockerView* curr_room_locker_list = potential_locker_view->next;
+    while(curr_room_locker_list != nullptr)
+    {
+        if(curr_room_locker_list->locker->avaliable_space > potential_locker_view->locker->avaliable_space)
+        {
+            curr_room_locker_list = curr_room_locker_list->next;
+
+        }
+        else if(curr_room_locker_list->locker->avaliable_space == potential_locker_view->locker->avaliable_space)
+        {
+            if(curr_room_locker_list->locker->locker_id > potential_locker_view->locker->locker_id)
+            {
+                curr_room_locker_list = curr_room_locker_list->next;
+            }
+            else break;
+        }
+        else break;
+    }
+    if(potential_locker_view->pre == nullptr)
+    {
+        //potential_locker->belonged_room->locker_list
+        if(curr_room_locker_list == nullptr)
+        {
+            LockerView* tail_locker_view = potential_locker->belonged_room->locker_list;
+            while(tail_locker_view!=nullptr)
+            {
+                if(tail_locker_view->next == nullptr) break;
+                tail_locker_view = tail_locker_view->next;
+            }
+            if(tail_locker_view != potential_locker_view)
+            {
+            tail_locker_view->next = potential_locker->belonged_room->locker_list;
+            potential_locker->belonged_room->locker_list->next->pre = nullptr;
+            potential_locker->belonged_room->locker_list->pre = tail_locker_view;
+            potential_locker->belonged_room->locker_list = potential_locker->belonged_room->locker_list->next;
+            tail_locker_view->next->next = nullptr;
+            }
+            
+        }
+        else if(curr_room_locker_list->pre != potential_locker_view)
+        {
+            curr_room_locker_list->pre->next = potential_locker->belonged_room->locker_list;
+            potential_locker->belonged_room->locker_list->pre = curr_room_locker_list->pre;
+            potential_locker->belonged_room->locker_list->next->pre = nullptr;
+            potential_locker->belonged_room->locker_list = potential_locker->belonged_room->locker_list->next;
+            curr_room_locker_list->pre->next->next = curr_room_locker_list;
+            curr_room_locker_list->pre = curr_room_locker_list->pre->next;
+        }
+    }
+    else
+    {
+        if(curr_room_locker_list == nullptr)
+        {
+            LockerView* tail_locker_view = potential_locker->belonged_room->locker_list;
+            while(tail_locker_view!=nullptr)
+            {
+                if(tail_locker_view->next == nullptr) break;
+                tail_locker_view = tail_locker_view->next;
+            }
+            if(potential_locker_view != tail_locker_view)
+            {
+                potential_locker_view->pre->next = potential_locker_view->next;
+                potential_locker_view->next->pre = potential_locker_view->pre;
+                tail_locker_view->next = potential_locker_view;
+                potential_locker_view->pre = tail_locker_view;
+                potential_locker_view->next = nullptr;
+            }
+        }
+        else if (curr_room_locker_list->pre != potential_locker_view)
+        {
+            potential_locker_view->pre->next = potential_locker_view->next;
+            potential_locker_view->next->pre = potential_locker_view->pre;
+            potential_locker_view->pre = curr_room_locker_list->pre;
+            potential_locker_view->next = curr_room_locker_list;
+            curr_room_locker_list->pre->next = potential_locker_view;
+            curr_room_locker_list->pre = potential_locker_view;
+        }
+    }
+}
+
+void swap_items(Item*& item_i,Item*& item_j)
+{
+    Item* temp_item = item_i;
+    item_i = item_j;
+    item_j = temp_item;
+}
 /// Task 1: Add new student
 int add_student(StudentManagement& student_management) {
     // 1. check array capacity
@@ -44,8 +319,10 @@ int add_student(StudentManagement& student_management) {
     student_management.students[student_management.size] = *new_student;
     student_management.size++;
     student_management.actual_students++;
+    int student_id = new_student->id;
+    delete new_student;
     // return new student's ID
-    return new_student->id;
+    return student_id;
 }
 
 /// Task 2: Add new locker to room management
@@ -648,7 +925,18 @@ bool defragment_for_student(StudentManagement& student_management, RoomManagemen
     // 2.1 For each item, find the locker and room the item is stored in.
     // 2.2 Take item from locker.
     // 2.3 Adjusts the locker’s position in the room’s locker list.
-
+    for (int i = 0; i < target_student.items_count; i++)
+    {
+        Item* curr_item = target_student.items[i];
+        Locker* curr_locker = curr_item->stored_locker;
+        Room* stored_room = curr_locker->belonged_room;
+        //curr_locker->avaliable_space += curr_item->size;
+        adjust_item_list(curr_item);
+        //target_student.items[i]->stored_locker.    ;//adjust item list
+        adjust_locker_list(stored_room,curr_locker);
+        curr_item->stored_locker = nullptr;
+    }
+    
 
     // 3. Find empty lockers and put items based on Greedy Packing Algorithm
     // Greedy Packing Algorithm:
@@ -664,8 +952,59 @@ bool defragment_for_student(StudentManagement& student_management, RoomManagemen
     //     Continues packing remaining items
 
 
+    //int success_packing_num = 0;
+    // sorting student items based on size and id
+    for (int i = 0; i < target_student.items_count; i++)
+    {
+        for (int j = 0; j < target_student.items_count - i - 1; j++)
+        {
+            if(target_student.items[j]->size < target_student.items[j+1]->size)
+            {
+                swap_items(target_student.items[j],target_student.items[j+1]);
+            }
+            else if(target_student.items[j]->size == target_student.items[j+1]->size)
+            {
+                if(target_student.items[j]->id < target_student.items[j+1]->id)
+                {
+                    swap_items(target_student.items[j],target_student.items[j+1]);
+                }
+            }
+        }
+    }
+     
+    int index = 0;
+    for (int i = 0; i < room_management.room_count; i++)
+    {
+        Room& room = room_management.rooms[i];
+        while(true)
+        {
+            LockerView* potential_locker_view = room.locker_list;
+            while (potential_locker_view!=nullptr)
+            {
+                if(potential_locker_view->locker->item_count == 0)
+                {
+                    while (potential_locker_view->locker->avaliable_space > 0)
+                    {
+                        if(potential_locker_view->locker->avaliable_space >= target_student.items[index]->size)
+                        {
+                            store_item(target_student.items[index],potential_locker_view->locker,
+                            potential_locker_view);
+                            index++;
+                            if(index == target_student.items_count) return true;
+                        }
+                        else break;
+                    }
+                    break;
+                }
+                else potential_locker_view = potential_locker_view->next;
+            }
+            if(potential_locker_view == nullptr) break;
+        }
+    }
+    
+    
     // 4. return true to indicate successful defragmentation.
-    return true;
+    return false;
 }
 
 /// Task 8: Clean up all items for a room
@@ -678,19 +1017,34 @@ void cleanup_for_room(StudentManagement& student_management, RoomManagement& roo
     //      - Find the student the item belongs to.
     //      - Remove item from student's item array.
     //      - Deallocates the item.
-    // LockerView* curr_locker = target_room.locker_list;
-    // while(target_room.locker_list != nullptr)
-    // {
-    //     while(curr_locker->locker->item_count > 0)
-    //     {
-    //         remove_item_for_student(student_management,room_management,
-    //         curr_locker->locker->item_list->item->belonged_student->id,curr_locker->locker->item_list->item->id);
-    //     }
-        
-    // }
     
-
+    while (true)
+    {
+        LockerView* curr_locker = target_room.locker_list;
+        while(curr_locker != nullptr)
+        {
+            if(curr_locker->locker->item_count > 0)
+            {
+                while(curr_locker->locker->item_count > 0)
+                {
+                ItemView* curr_item = curr_locker->locker->item_list;
+                remove_item_for_student(student_management,room_management,curr_item->item->belonged_student->id,
+                curr_item->item->id);
+                }
+                break;
+            }
+            else
+            {
+                curr_locker = curr_locker->next;
+            }
+        }
+        if(curr_locker == nullptr) break;
+        
+    }
     // 3. Reset locker information and locker list order.
+    // have done...
+    
+    
 
     return;
 }
