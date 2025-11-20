@@ -273,13 +273,14 @@ void store_item(Item* new_item,Locker* potential_locker,LockerView* potential_lo
         }
     }
 }
-
 void swap_items(Item*& item_i,Item*& item_j)
 {
     Item* temp_item = item_i;
     item_i = item_j;
     item_j = temp_item;
 }
+
+
 /// Task 1: Add new student
 int add_student(StudentManagement& student_management) {
     // 1. check array capacity

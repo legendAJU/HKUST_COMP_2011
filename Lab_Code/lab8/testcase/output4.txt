@@ -1,0 +1,94 @@
+Welcome to Student GPA Management System!
+Initializing...
+Enter student name: Enter max number of courses: ======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Enter course name: Enter course credit: Enter attendance, assignment, midterm, and final exam scores: Course COMP1021 added successfully.
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Enter course name: Enter course credit: Enter attendance, assignment, midterm, and final exam scores: Course COMP2011 added successfully.
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Enter course name: Enter course credit: Enter attendance, assignment, midterm, and final exam scores: Course COMP2711 added successfully.
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Enter course name: Enter course credit: Enter attendance, assignment, midterm, and final exam scores: Course COMP3111 added successfully.
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Enter course name to search: Course not found.
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: === Transcript for hrx ===
+COMP1021 (3 credits) - Total: 90.7
+COMP2011 (4 credits) - Total: 81.6
+COMP2711 (3 credits) - Total: 78.5
+COMP3111 (4 credits) - Total: 67.2
+Overall GPA: 3.10
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: === Transcript for hrx ===
+COMP1021 (3 credits) - Total: 90.7
+COMP2011 (4 credits) - Total: 81.6
+COMP2711 (3 credits) - Total: 78.5
+COMP3111 (4 credits) - Total: 67.2
+Overall GPA: 3.10
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Overall GPA: 3.10
+======================================
+0. Quit
+1. Add a course
+2. Update a course
+3. Search for a course
+4. Display transcript
+5. Compute GPA
+======================================
+Option: Exiting system...
+Program ended. Goodbye!
