@@ -20,6 +20,13 @@ Course::Course(string n, int c, double att, double asg, double mid, double fin) 
     // TODO:
     // 1. assign all parameters to member variables
     // 2. call computeTotal() to calculate weighted score
+    name = n;
+    credit = c;
+    attendance = att;
+    assignment = asg;
+    midterm = mid;
+    finalExam = fin;
+    computeTotal();
 }
 
 // ===== Destructor =====
@@ -35,21 +42,25 @@ Course::~Course() {
 // ===== Compute weighted total =====
 void Course::computeTotal() {
     // TODO: compute weighted total and store in total
+    total = 0.1 * attendance + 0.2 * assignment + 0.3 * midterm + 0.4 * finalExam;
 }
 
 // ===== Accessors =====
 double Course::getTotal() const {
     // TODO: return total
+    return total;
     return 0.0;
 }
 
 int Course::getCredit() const {
     // TODO: return credit
+    return credit;
     return 0;
 }
 
 string Course::getName() const {
     // TODO: return name
+    return name;
     return "";
 }
 
@@ -59,6 +70,11 @@ void Course::setScores(double att, double asg, double mid, double fin) {
     // TODO:
     // 1. update attendance, assignment, midterm, finalExam
     // 2. call computeTotal()
+    attendance = att;
+    assignment = asg;
+    midterm = mid;
+    finalExam = fin;
+    computeTotal();
 }
 
 // ===== Display function =====
@@ -66,4 +82,6 @@ void Course::setScores(double att, double asg, double mid, double fin) {
 // COMP2011 (3 credits) - Total: 92.1
 void Course::display() const {
     // TODO: print name, credits, and total (1 decimal place)
+    cout<<fixed << setprecision(1);
+    cout<<name<<" ("<<credit<<" credits) - Total: "<< total<<endl;
 }
